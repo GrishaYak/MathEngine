@@ -3,6 +3,7 @@ from component import Component
 # no brackets
 letters = 'abcdefghijklmnopqrstuvwxyz'
 numbers = set(list('0123456789'))
+allowedSymbols = numbers | set(list('*^%/' + letters + letters.upper()))
 
 class Expression:
     components: list[Component]
@@ -13,8 +14,7 @@ class Expression:
 def breakExpression(expression: str) -> list[Expression]:
     signs = set(list('+-'))
     prefix = ''
-    left = []
-    allowedSymbols = numbers | set(list('*^%/' + letters + letters.upper()))
+    left: list[Expression] = []
     for s in expression:
         if s in signs:
             left = breakExpression(prefix)
